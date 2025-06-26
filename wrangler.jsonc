@@ -30,8 +30,8 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "earth_and_home",
-      "database_id": "earth_and_home"
+      "database_name": "earth-and-home-db",
+      "database_id": "fce5d319-e0d2-4c33-aea1-31bc18908686"
     }
   ]
 }
