@@ -5,6 +5,10 @@ import tailwindcss from "@tailwindcss/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
+  server: {
+    port: 8787,
+    host: true,
+  },
   plugins: [
     tsconfigPaths(),
     cloudflare({
