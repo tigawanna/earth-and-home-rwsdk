@@ -18,7 +18,7 @@ dist
 *.tsbuildinfo
 
 # IDEs and editors
-.vscode/
+
 .idea/
 *.suo
 *.ntvs*
