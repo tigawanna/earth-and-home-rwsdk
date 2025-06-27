@@ -22,22 +22,69 @@ datasource db {
 }
 
 model User {
-  id          String      @id @default(uuid()) // User ID (UUID-based)
-  username    String      @unique
-  createdAt   DateTime    @default(now())
+  id        String   @id @default(uuid()) // User ID (UUID-based)
+  username  String   @unique
+  createdAt DateTime @default(now())
 
   credentials Credential[] // Relationship: One user can have many credentials
+  properties  Property[] // Relationship: One user can list many properties
+  favorites   PropertyFavorite[] // Relationship: Users can favorite properties
 }
 
 model Credential {
-  id            String   @id @default(uuid()) // Internal DB ID
-  userId        String   @unique // Every credential is linked to a specific user
-  user          User     @relation(fields: [userId], references: [id])
-  createdAt     DateTime @default(now())
-  credentialId  String   @unique // WebAuthn credential identifier
-  publicKey     Bytes
-  counter       Int      @default(0)
-  
+  id           String   @id @default(uuid()) // Internal DB ID
+  userId       String   @unique // Every credential is linked to a specific user
+  user         User     @relation(fields: [userId], references: [id])
+  createdAt    DateTime @default(now())
+  credentialId String   @unique // WebAuthn credential identifier
+  publicKey    Bytes
+  counter      Int      @default(0)
+
   @@index([credentialId])
   @@index([userId])
+}
+
+model Property {
+  id          String         @id @default(uuid())
+  title       String
+  description String
+  location    String
+  price       Int // Price in cents to avoid floating point issues
+  bedrooms    Int
+  bathrooms   Int
+  squareFeet  Int
+  imageUrl    String?
+  isFeatured  Boolean        @default(false)
+  status      PropertyStatus @default(FOR_SALE)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  // Relationships
+  listerId  String
+  lister    User               @relation(fields: [listerId], references: [id])
+  favorites PropertyFavorite[]
+
+  @@index([status])
+  @@index([isFeatured])
+  @@index([price])
+  @@index([location])
+}
+
+model PropertyFavorite {
+  id         String   @id @default(uuid())
+  userId     String
+  propertyId String
+  createdAt  DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id])
+  property Property @relation(fields: [propertyId], references: [id])
+
+  @@unique([userId, propertyId]) // A user can only favorite a property once
+}
+
+enum PropertyStatus {
+  FOR_SALE
+  SOLD
+  PENDING
+  OFF_MARKET
 }

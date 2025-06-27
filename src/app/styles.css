@@ -1,7 +1,123 @@
 @import 'tailwindcss';
 @import "tw-animate-css";
 
-@plugin "daisyui";
+@plugin "daisyui" {
+  themes: earth-light --default, earth-dark --prefersdark;
+}
+
+/* Earth & Home Light Theme */
+@plugin "daisyui/theme" {
+  name: "earth-light";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+
+  /* Base colors - Clean whites and light grays */
+  --color-base-100: oklch(100% 0 0); /* Pure white */
+  --color-base-200: oklch(98% 0.005 120); /* Very light green-tinted gray */
+  --color-base-300: oklch(95% 0.01 120); /* Light green-tinted gray */
+  --color-base-content: oklch(25% 0.02 240); /* Dark text */
+
+  /* Primary - Earth & Home green */
+  --color-primary: oklch(55% 0.15 140); /* Professional green */
+  --color-primary-content: oklch(98% 0.01 140); /* Light text on green */
+
+  /* Secondary - Warm earth tone */
+  --color-secondary: oklch(65% 0.08 80); /* Warm beige/tan */
+  --color-secondary-content: oklch(25% 0.02 80); /* Dark text on beige */
+
+  /* Accent - Orange from the website */
+  --color-accent: oklch(70% 0.15 45); /* Professional orange */
+  --color-accent-content: oklch(98% 0.01 45); /* Light text on orange */
+
+  /* Neutral - Professional gray */
+  --color-neutral: oklch(45% 0.01 240); /* Medium gray */
+  --color-neutral-content: oklch(98% 0.01 240); /* Light text on gray */
+
+  /* Semantic colors */
+  --color-info: oklch(65% 0.15 220); /* Professional blue */
+  --color-info-content: oklch(98% 0.01 220);
+  
+  --color-success: oklch(60% 0.15 140); /* Success green */
+  --color-success-content: oklch(98% 0.01 140);
+  
+  --color-warning: oklch(75% 0.15 60); /* Warning amber */
+  --color-warning-content: oklch(20% 0.02 60);
+  
+  --color-error: oklch(60% 0.18 20); /* Error red */
+  --color-error-content: oklch(98% 0.01 20);
+
+  /* Border radius - Modern, slightly rounded */
+  --radius-selector: 0.75rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+
+  /* Sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* Border and effects */
+  --border: 1px;
+  --depth: 1; /* Subtle shadows */
+  --noise: 0; /* Clean, no noise */
+}
+
+/* Earth & Home Dark Theme */
+@plugin "daisyui/theme" {
+  name: "earth-dark";
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+
+  /* Base colors - Dark earth tones */
+  --color-base-100: oklch(15% 0.02 120); /* Dark green-tinted background */
+  --color-base-200: oklch(18% 0.025 120); /* Slightly lighter */
+  --color-base-300: oklch(22% 0.03 120); /* Card backgrounds */
+  --color-base-content: oklch(90% 0.01 120); /* Light text */
+
+  /* Primary - Brighter green for dark mode */
+  --color-primary: oklch(65% 0.18 140); /* Vibrant green */
+  --color-primary-content: oklch(15% 0.02 140); /* Dark text on green */
+
+  /* Secondary - Warm earth tone for dark mode */
+  --color-secondary: oklch(55% 0.1 80); /* Muted warm tone */
+  --color-secondary-content: oklch(90% 0.01 80); /* Light text */
+
+  /* Accent - Warmer orange for dark mode */
+  --color-accent: oklch(75% 0.18 45); /* Vibrant orange */
+  --color-accent-content: oklch(15% 0.02 45); /* Dark text on orange */
+
+  /* Neutral - Dark gray */
+  --color-neutral: oklch(55% 0.01 240); /* Medium-light gray */
+  --color-neutral-content: oklch(15% 0.02 240); /* Dark text */
+
+  /* Semantic colors for dark mode */
+  --color-info: oklch(70% 0.18 220); /* Bright blue */
+  --color-info-content: oklch(15% 0.02 220);
+  
+  --color-success: oklch(70% 0.18 140); /* Bright success green */
+  --color-success-content: oklch(15% 0.02 140);
+  
+  --color-warning: oklch(80% 0.18 60); /* Bright warning amber */
+  --color-warning-content: oklch(15% 0.02 60);
+  
+  --color-error: oklch(70% 0.2 20); /* Bright error red */
+  --color-error-content: oklch(95% 0.01 20);
+
+  /* Border radius - Same as light theme */
+  --radius-selector: 0.75rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+
+  /* Sizes */
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+
+  /* Border and effects */
+  --border: 1px;
+  --depth: 1; /* Subtle shadows */
+  --noise: 0; /* Clean, no noise */
+}
 
 
 

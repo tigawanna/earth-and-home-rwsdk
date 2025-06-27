@@ -21,6 +21,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@/components/*": ["./src/app/components/*"],
       "@generated/*": ["./generated/*"]
     },
     /* Enable importing .json files */

@@ -1,13 +1,35 @@
 import { RequestInfo } from "rwsdk/worker";
+import { HeroSection } from "@/components/home/HeroSection";
+import { FeaturedProperties } from "@/components/home/FeaturedProperties";
+import { WhyChooseUs } from "@/components/home/WhyChooseUs";
+import { UserStatus } from "@/components/home/UserStatus";
+import { mockProperties } from "@/app/services/PropertyService";
+
 
 export function Home({ ctx }: RequestInfo) {
+  // In the future, these will be async calls to Prisma
+  // For now, using mock data
+  const featuredProperties = mockProperties.filter(p => p.isFeatured);
+
   return (
-    <div className="container mx-auto p-4 min-h-screen">
-      <p className="text-3xl">
-        {ctx.user?.username
-          ? `You are logged in as user ${ctx.user.username}`
-          : "You are not logged in"}
-      </p>
+    <div>
+      <HeroSection 
+        stats={{
+          propertiesListed: 1200,
+          happyFamilies: 500,
+          yearsExperience: 15
+        }}
+      />
+
+      <FeaturedProperties
+        properties={featuredProperties}
+      />
+
+      <WhyChooseUs />
+
+      <UserStatus 
+        user={ctx.user}
+      />
     </div>
   );
 }
