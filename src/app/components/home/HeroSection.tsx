@@ -16,9 +16,10 @@ export function HeroSection({ stats }: HeroSectionProps) {
   };
 
   return (
-    <section className="hero min-h-[600px] bg-gradient-to-br from-base-100 to-base-200">
+    <section className="hero min-h-[600px] bg-gradient-to-br from-secondary/30  via-secondary/10 to-base-200">
       <div className="hero-content text-center">
         <div className="max-w-4xl">
+        <div className="min-h-[50vh] flex flex-col justify-center items-center">
           <h1 className="text-5xl font-bold text-base-content mb-4">
             Find Your Perfect <span className="text-primary">Dream Home</span>
           </h1>
@@ -26,9 +27,9 @@ export function HeroSection({ stats }: HeroSectionProps) {
             Discover exceptional properties with Earth & Home. From luxury estates to cozy family homes, 
             we connect you with the perfect place to call home.
           </p>
-          
+          </div>
           {/* Stats */}
-          <div className="stats stats-horizontal shadow-lg mb-8">
+          <div className="stats stats-vertical md:stats-horizontal shadow-lg mb-8">
             <div className="stat">
               <div className="stat-value text-primary">{defaultStats.propertiesListed.toLocaleString()}+</div>
               <div className="stat-title">Properties Listed</div>

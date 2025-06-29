@@ -36,7 +36,7 @@ export function MobileMenu() {
       {/* Mobile actions */}
       <div className="p-4 border-t border-base-300 mt-auto">
         <div className="space-y-3">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4 justify-between px-4">
             <span className="text-sm font-medium">Theme</span>
             <LazyThemeSwitcher />
           </div>
