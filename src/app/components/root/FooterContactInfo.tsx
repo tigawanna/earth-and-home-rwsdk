@@ -17,16 +17,15 @@ export function FooterContactInfo() {
         {contactInfo.map((contact, index) => (
           <div key={index} className="flex items-center gap-2">
             <span>{contact.icon}</span>
-            <span 
-              className="text-neutral-content/80"
-              style={{ whiteSpace: 'pre-line' }}
-            >
+            <span
+              className="text-base-content/70  hover:text-primary "
+              style={{ whiteSpace: "pre-line" }}>
               {contact.text}
             </span>
           </div>
         ))}
       </div>
-      
+
       <div className="mt-4">
         <h5 className="font-medium mb-2">Newsletter</h5>
         <NewsletterSignup />

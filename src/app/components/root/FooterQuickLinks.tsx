@@ -13,10 +13,7 @@ export function FooterQuickLinks() {
       <ul className="space-y-2 text-sm">
         {quickLinks.map((link) => (
           <li key={link.href}>
-            <a 
-              href={link.href} 
-              className="text-neutral-content/80 hover:text-primary transition-colors"
-            >
+            <a href={link.href} className="text-base-content/70 hover:text-primary  transition-colors">
               {link.label}
             </a>
           </li>
