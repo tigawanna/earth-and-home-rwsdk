@@ -6,19 +6,40 @@ export function SiteHeader() {
     <header className="bg-base-100 shadow-sm border-b border-base-300">
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-primary-content font-bold text-lg">{company.icon}</span>
+          <div className="flex gap-2 items-center">
+            {/* Mobile menu button */}
+            <div className="lg:hidden">
+              <label htmlFor="mobile-drawer" className="btn btn-square btn-ghost">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </label>
             </div>
-            <div>
-              <h1 className="text-2xl font-bold text-base-content">{company.name}</h1>
-              <p className="text-sm text-base-content/70">{company.tagline}</p>
+
+            {/* Logo */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                <span className="text-primary-content font-bold text-lg">{company.icon}</span>
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-base-content">{company.name}</h1>
+                <p className="text-sm text-base-content/70">{company.tagline}</p>
+              </div>
             </div>
           </div>
 
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Desktop Navigation - Hidden on mobile */}
+          <nav className="hidden lg:flex items-center gap-8">
             {mainNavigation.map((link) => (
               <a
                 key={link.href}
@@ -29,13 +50,18 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          {/* Actions */}
-          <div className="flex items-center gap-4 px-4">
+          {/* Desktop Actions - Hidden on mobile */}
+          <div className="hidden lg:flex items-center gap-4">
             {/* Theme Switcher */}
             <LazyThemeSwitcher />
             <a href="/login" className="btn btn-secondary">
               Log in
             </a>
+          </div>
+
+          {/* Mobile theme switcher only */}
+          <div className="lg:hidden">
+            <LazyThemeSwitcher />
           </div>
         </div>
       </div>
