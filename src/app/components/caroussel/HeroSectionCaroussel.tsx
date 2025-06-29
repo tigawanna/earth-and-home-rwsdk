@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { PropertyOverlay } from './PropertyOverlay';
+import { PropertyOverlay } from '../home/PropertyOverlay';
 import { CarouselIndicators } from './CarouselControls';
 import { CarouselSlide } from './CarouselSlide';
 

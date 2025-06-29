@@ -1,5 +1,5 @@
 
-import { HeroSectionCaroussel } from './HeroSectionCaroussel';
+import { HeroSectionCaroussel } from '../caroussel/HeroSectionCaroussel';
 
 interface Property {
   id: string;

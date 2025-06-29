@@ -1,4 +1,4 @@
-import { PropertyOverlay } from './PropertyOverlay';
+import { PropertyOverlay } from '../home/PropertyOverlay';
 import { CarouselNavButtons } from './CarouselControls';
 
 interface Property {
