@@ -1,4 +1,5 @@
-import { PropertyCard, type Property } from '../property/PropertyCard';
+import { PropertyCard } from '../listings/PropertyCard';
+import type { Property } from '@/app/services/PropertyService';
 
 
 interface FeaturedPropertiesProps {
@@ -38,8 +39,6 @@ export function FeaturedProperties({
                 <PropertyCard
                   key={property.id}
                   property={property}
-                  onViewDetails={onViewDetails}
-                  onContact={onContact}
                 />
               ))}
             </div>

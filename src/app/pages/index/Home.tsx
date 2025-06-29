@@ -12,11 +12,6 @@ export function Home({ ctx }: RequestInfo) {
   // For now, using mock data
   const featuredProperties = mockProperties.filter(p => p.isFeatured);
 
-  // const handlePropertySearch = (searchParams: any) => {
-  //   // TODO: Implement search functionality
-  //   console.log('Search params:', searchParams);
-  // };
-
   return (
     <div>
       <HeroSection 
@@ -28,7 +23,7 @@ export function Home({ ctx }: RequestInfo) {
         featuredProperties={featuredProperties}
       />
 
-      <PropertySearch  />
+      <PropertySearch />
 
       <FeaturedProperties
         properties={featuredProperties}

@@ -45,19 +45,26 @@ model Credential {
 }
 
 model Property {
-  id          String         @id @default(uuid())
-  title       String
-  description String
-  location    String
-  price       Int // Price in cents to avoid floating point issues
-  bedrooms    Int
-  bathrooms   Int
-  squareFeet  Int
-  imageUrl    String?
-  isFeatured  Boolean        @default(false)
-  status      PropertyStatus @default(FOR_SALE)
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
+  id           String         @id @default(uuid())
+  title        String
+  description  String
+  location     String
+  city         String? // Added for better location filtering
+  state        String? // Added for better location filtering
+  zipCode      String? // Added for better location filtering
+  price        Int // Price in cents to avoid floating point issues
+  propertyType PropertyType   @default(HOUSE) // Added property type
+  bedrooms     Int
+  bathrooms    Int
+  squareFeet   Int
+  yearBuilt    Int? // Added year built for filtering
+  imageUrl     String?
+  imagesJson   String? // JSON string of image URLs
+  featuresJson String? // JSON string of features (Pool, Garage, Garden, etc.)
+  isFeatured   Boolean        @default(false)
+  status       PropertyStatus @default(FOR_SALE)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
 
   // Relationships
   listerId  String
@@ -68,6 +75,11 @@ model Property {
   @@index([isFeatured])
   @@index([price])
   @@index([location])
+  @@index([city])
+  @@index([propertyType])
+  @@index([bedrooms])
+  @@index([bathrooms])
+  @@index([squareFeet])
 }
 
 model PropertyFavorite {
@@ -87,4 +99,13 @@ enum PropertyStatus {
   SOLD
   PENDING
   OFF_MARKET
+}
+
+enum PropertyType {
+  HOUSE
+  CONDO
+  TOWNHOUSE
+  APARTMENT
+  VILLA
+  LAND
 }

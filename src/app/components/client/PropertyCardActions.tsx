@@ -1,6 +1,6 @@
 'use client';
 
-import type { Property } from '@/components/property/PropertyCard';
+import type { Property } from '@/app/services/PropertyService';
 
 interface PropertyCardActionsProps {
   property: Property;

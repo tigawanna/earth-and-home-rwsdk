@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import { PropertyService, type PropertySearchParams } from '@/app/services/PropertyService';
 
 interface PropertySearchProps {
-  onSearch?: (searchParams: SearchParams) => void;
+  onSearch?: (searchParams: PropertySearchParams) => void;
+  initialParams?: PropertySearchParams;
 }
 
-interface SearchParams {
+interface SearchFormParams {
   location: string;
   propertyType: string;
   priceRange: string;
@@ -15,24 +17,123 @@ interface SearchParams {
   size: string;
 }
 
-export function PropertySearch({ onSearch }: PropertySearchProps) {
-  const [searchParams, setSearchParams] = useState<SearchParams>({
-    location: '',
-    propertyType: 'Any Type',
-    priceRange: 'Any Price',
+// Helper function to parse price range
+function parsePriceRange(priceRange: string): { priceMin?: number; priceMax?: number } {
+  switch (priceRange) {
+    case 'Under $300K':
+      return { priceMax: 300000 };
+    case '$300K - $500K':
+      return { priceMin: 300000, priceMax: 500000 };
+    case '$500K - $750K':
+      return { priceMin: 500000, priceMax: 750000 };
+    case '$750K - $1M':
+      return { priceMin: 750000, priceMax: 1000000 };
+    case '$1M - $2M':
+      return { priceMin: 1000000, priceMax: 2000000 };
+    case 'Over $2M':
+      return { priceMin: 2000000 };
+    default:
+      return {};
+  }
+}
+
+// Helper function to parse bedroom/bathroom filters
+function parseRoomFilter(filter: string): number | undefined {
+  if (filter.endsWith('+')) {
+    return parseInt(filter.replace('+', ''));
+  }
+  return undefined;
+}
+
+// Helper function to parse size filter
+function parseSizeFilter(size: string): { minSquareFeet?: number; maxSquareFeet?: number } {
+  switch (size) {
+    case 'Under 1,000':
+      return { maxSquareFeet: 1000 };
+    case '1,000 - 1,500':
+      return { minSquareFeet: 1000, maxSquareFeet: 1500 };
+    case '1,500 - 2,000':
+      return { minSquareFeet: 1500, maxSquareFeet: 2000 };
+    case '2,000 - 3,000':
+      return { minSquareFeet: 2000, maxSquareFeet: 3000 };
+    case 'Over 3,000':
+      return { minSquareFeet: 3000 };
+    default:
+      return {};
+  }
+}
+
+export function PropertySearch({ onSearch, initialParams }: PropertySearchProps) {
+  const [searchParams, setSearchParams] = useState<SearchFormParams>({
+    location: initialParams?.location || '',
+    propertyType: initialParams?.propertyType || 'Any Type',
+    priceRange: 'Any Price', // We'll need to reverse engineer this from initialParams if needed
     bedrooms: 'Bedrooms',
     bathrooms: 'Bathrooms',
     size: 'Size (sq ft)'
   });
 
   const [showMoreFilters, setShowMoreFilters] = useState(false);
+  const [moreFilters, setMoreFilters] = useState({
+    yearBuilt: 'Any Year',
+    features: {
+      pool: false,
+      garage: false,
+      garden: false
+    },
+    status: 'For Sale'
+  });
 
-  const handleInputChange = (field: keyof SearchParams, value: string) => {
+  const handleInputChange = (field: keyof SearchFormParams, value: string) => {
     setSearchParams(prev => ({ ...prev, [field]: value }));
   };
 
+  const handleMoreFiltersChange = (field: string, value: any) => {
+    setMoreFilters(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleFeatureChange = (feature: string, checked: boolean) => {
+    setMoreFilters(prev => ({
+      ...prev,
+      features: { ...prev.features, [feature]: checked }
+    }));
+  };
+
   const handleSearch = () => {
-    onSearch?.(searchParams);
+    // Convert form params to PropertySearchParams
+    const priceRange = parsePriceRange(searchParams.priceRange);
+    const sizeRange = parseSizeFilter(searchParams.size);
+    const bedroomsFilter = parseRoomFilter(searchParams.bedrooms);
+    const bathroomsFilter = parseRoomFilter(searchParams.bathrooms);
+
+    // Get selected features
+    const selectedFeatures = Object.entries(moreFilters.features)
+      .filter(([_, checked]) => checked)
+      .map(([feature, _]) => feature.charAt(0).toUpperCase() + feature.slice(1));
+
+    const searchQuery: PropertySearchParams = {
+      location: searchParams.location || undefined,
+      propertyType: searchParams.propertyType !== 'Any Type' ? searchParams.propertyType : undefined,
+      ...priceRange,
+      bedrooms: bedroomsFilter,
+      bathrooms: bathroomsFilter,
+      ...sizeRange,
+      features: selectedFeatures.length > 0 ? selectedFeatures : undefined,
+      status: moreFilters.status.toLowerCase().replace(' ', '-'),
+      page: 1,
+      limit: 20
+    };
+
+    // Create URL params and navigate
+    const urlParams = PropertyService.searchParamsToURLParams(searchQuery);
+    
+    // Navigate to listings page with search params
+    if (typeof window !== 'undefined') {
+      window.location.href = `/listings?${urlParams.toString()}`;
+    }
+
+    // Also call the onSearch callback if provided
+    onSearch?.(searchQuery);
   };
 
   return (
@@ -187,7 +288,11 @@ export function PropertySearch({ onSearch }: PropertySearchProps) {
                     <label className="label">
                       <span className="label-text font-medium">Year Built</span>
                     </label>
-                    <select className="select select-bordered w-full text-sm">
+                    <select 
+                      className="select select-bordered w-full text-sm"
+                      value={moreFilters.yearBuilt}
+                      onChange={(e) => handleMoreFiltersChange('yearBuilt', e.target.value)}
+                    >
                       <option>Any Year</option>
                       <option>2020+</option>
                       <option>2010-2020</option>
@@ -203,15 +308,30 @@ export function PropertySearch({ onSearch }: PropertySearchProps) {
                     </label>
                     <div className="flex flex-wrap gap-3">
                       <label className="label cursor-pointer">
-                        <input type="checkbox" className="checkbox checkbox-sm checkbox-primary" />
+                        <input 
+                          type="checkbox" 
+                          className="checkbox checkbox-sm checkbox-primary"
+                          checked={moreFilters.features.pool}
+                          onChange={(e) => handleFeatureChange('pool', e.target.checked)}
+                        />
                         <span className="label-text ml-2 text-sm">Pool</span>
                       </label>
                       <label className="label cursor-pointer">
-                        <input type="checkbox" className="checkbox checkbox-sm checkbox-primary" />
+                        <input 
+                          type="checkbox" 
+                          className="checkbox checkbox-sm checkbox-primary"
+                          checked={moreFilters.features.garage}
+                          onChange={(e) => handleFeatureChange('garage', e.target.checked)}
+                        />
                         <span className="label-text ml-2 text-sm">Garage</span>
                       </label>
                       <label className="label cursor-pointer">
-                        <input type="checkbox" className="checkbox checkbox-sm checkbox-primary" />
+                        <input 
+                          type="checkbox" 
+                          className="checkbox checkbox-sm checkbox-primary"
+                          checked={moreFilters.features.garden}
+                          onChange={(e) => handleFeatureChange('garden', e.target.checked)}
+                        />
                         <span className="label-text ml-2 text-sm">Garden</span>
                       </label>
                     </div>
@@ -221,7 +341,11 @@ export function PropertySearch({ onSearch }: PropertySearchProps) {
                     <label className="label">
                       <span className="label-text font-medium">Listing Status</span>
                     </label>
-                    <select className="select select-bordered w-full text-sm">
+                    <select 
+                      className="select select-bordered w-full text-sm"
+                      value={moreFilters.status}
+                      onChange={(e) => handleMoreFiltersChange('status', e.target.value)}
+                    >
                       <option>For Sale</option>
                       <option>New Listing</option>
                       <option>Price Reduced</option>

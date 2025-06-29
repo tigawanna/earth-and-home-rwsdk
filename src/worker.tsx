@@ -4,6 +4,8 @@ import { Document } from "@/app/Document";
 import { Home } from "@/app/pages/index/Home";
 import { setCommonHeaders } from "@/app/headers";
 import { userRoutes } from "@/app/pages/user/routes";
+import { routes as listingsRoutes } from "@/app/pages/listings/routes";
+import { routes as propertyRoutes } from "@/app/pages/property/routes";
 import { sessions, setupSessionStore } from "./session/store";
 import { Session } from "./session/durableObject";
 import { type User, db, setupDb } from "@/db";
@@ -61,6 +63,8 @@ export default defineApp([
         Home,
       ]),
       prefix("/user", userRoutes),
+      prefix("/listings", listingsRoutes),
+      prefix("/property", propertyRoutes),
     ]),
   ]),
 ]);
