@@ -1,5 +1,5 @@
 import { PropertyCard, type Property } from '../property/PropertyCard';
-import { InteractiveButton } from '../client/InteractiveButton';
+
 
 interface FeaturedPropertiesProps {
   properties: Property[];
@@ -45,12 +45,11 @@ export function FeaturedProperties({
             </div>
 
             <div className="text-center mt-12">
-              <InteractiveButton 
-                href="/properties"
+              <button 
                 className="btn btn-outline btn-lg"
               >
                 View All Properties
-              </InteractiveButton>
+              </button>
             </div>
           </>
         )}

@@ -1,4 +1,3 @@
-import { InteractiveButton } from '../client/InteractiveButton';
 
 interface HeroSectionProps {
   stats?: {
@@ -45,18 +44,16 @@ export function HeroSection({ stats }: HeroSectionProps) {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <InteractiveButton 
-              href="/properties"
+            <button 
               className="btn btn-primary btn-lg"
             >
               🏠 Browse Properties
-            </InteractiveButton>
-            <InteractiveButton 
-              href="/sell"
+            </button>
+            <button 
               className="btn btn-outline btn-lg"
             >
               🏡 Sell Your Home
-            </InteractiveButton>
+            </button >
           </div>
         </div>
       </div>

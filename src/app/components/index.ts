@@ -9,6 +9,5 @@ export { PropertyCard, type Property } from "@/components/property/PropertyCard"
 
 // Client components
 export { ThemeSwitcher } from '@/components/client/ThemeSwitcher';
-export { InteractiveButton } from '@/components/client/InteractiveButton';
 export { PropertyCardActions } from '@/components/client/PropertyCardActions';
 export { NewsletterSignup } from '@/components/client/NewsletterSignup';

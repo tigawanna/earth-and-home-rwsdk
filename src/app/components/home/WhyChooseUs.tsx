@@ -1,5 +1,3 @@
-import { InteractiveButton } from '../client/InteractiveButton';
-
 interface FeatureItem {
   icon: string;
   title: string;
@@ -60,12 +58,11 @@ export function WhyChooseUs({ onLearnMore }: WhyChooseUsProps) {
         </div>
 
         <div className="text-center mt-12">
-          <InteractiveButton 
-            href="/about"
+          <button
             className="btn btn-primary btn-lg"
           >
             Learn More About Us
-          </InteractiveButton>
+          </button>
         </div>
       </div>
     </section>

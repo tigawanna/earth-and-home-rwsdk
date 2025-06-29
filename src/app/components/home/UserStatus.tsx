@@ -1,5 +1,3 @@
-import { InteractiveButton } from '@/components/client/InteractiveButton';
-
 interface UserStatusProps {
   user?: {
     username: string;
@@ -18,12 +16,11 @@ export function UserStatus({ user, onSignIn }: UserStatusProps) {
             ) : (
               <>
                 Sign in to save your favorite properties and get personalized recommendations 🏠
-                <InteractiveButton 
-                  href="/user/login"
+                <button 
                   className="btn btn-primary btn-sm ml-4"
                 >
                   Sign In
-                </InteractiveButton>
+                </button>
               </>
             )}
           </span>
