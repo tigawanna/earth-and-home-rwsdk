@@ -1,7 +1,7 @@
 import type { LayoutProps } from "rwsdk/router";
-import { TopContactBar } from "@/components/root/TopContactBar";
-import { SiteHeader } from "@/components/root/SiteHeader";
-import { SiteFooter } from "@/components/root/SiteFooter";
+import { TopContactBar } from "@/app/components/root/header/TopContactBar";
+import { SiteHeader } from "@/app/components/root/header/SiteHeader";
+import { SiteFooter } from "@/app/components/root/footer/SiteFooter";
 
 export function AppLayout({ children, requestInfo }: LayoutProps) {
   return (

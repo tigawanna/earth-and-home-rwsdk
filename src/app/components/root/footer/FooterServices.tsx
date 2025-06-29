@@ -1,4 +1,4 @@
-import { services } from '../../data/site-data';
+import { services } from '../../../data/site-data';
 
 export function FooterServices() {
   return (

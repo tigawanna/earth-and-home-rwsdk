@@ -1,6 +1,6 @@
-import { ThemeSwitcher } from '@/components/client/ThemeSwitcher';
-import { InteractiveButton } from '@/components/client/InteractiveButton';
-import { company, mainNavigation } from '@/data/site-data';
+import { ThemeSwitcher } from "@/components/client/ThemeSwitcher";
+import { InteractiveButton } from "@/components/client/InteractiveButton";
+import { company, mainNavigation } from "@/data/site-data";
 
 export function SiteHeader() {
   return (
@@ -21,33 +21,22 @@ export function SiteHeader() {
           {/* Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {mainNavigation.map((link) => (
-              <a 
+              <a
                 key={link.href}
-                href={link.href} 
-                className="text-base-content hover:text-primary transition-colors"
-              >
+                href={link.href}
+                className="text-base-content hover:text-primary transition-colors">
                 {link.label}
               </a>
             ))}
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 px-4">
             {/* Theme Switcher */}
             <ThemeSwitcher />
-            
-            <InteractiveButton 
-              href="/search"
-              className="btn btn-ghost"
-            >
-              🔍 Search
-            </InteractiveButton>
-            <InteractiveButton 
-              href="/list-property"
-              className="btn btn-accent"
-            >
-              List Property
-            </InteractiveButton>
+            <a href="/login" className="btn btn-secondary">
+              Log in
+            </a>
           </div>
         </div>
       </div>
