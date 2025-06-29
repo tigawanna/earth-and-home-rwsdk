@@ -1,6 +1,5 @@
-import { ThemeSwitcher } from "@/components/client/ThemeSwitcher";
-import { InteractiveButton } from "@/components/client/InteractiveButton";
 import { company, mainNavigation } from "@/data/site-data";
+import { LazyThemeSwitcher } from "@/components/client/LazyThemeSwitcher";
 
 export function SiteHeader() {
   return (
@@ -33,7 +32,7 @@ export function SiteHeader() {
           {/* Actions */}
           <div className="flex items-center gap-4 px-4">
             {/* Theme Switcher */}
-            {/* <ThemeSwitcher /> */}
+            <LazyThemeSwitcher />
             <a href="/login" className="btn btn-secondary">
               Log in
             </a>
