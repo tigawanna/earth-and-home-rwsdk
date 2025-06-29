@@ -33,7 +33,7 @@ export function SiteHeader() {
           {/* Actions */}
           <div className="flex items-center gap-4 px-4">
             {/* Theme Switcher */}
-            <ThemeSwitcher />
+            {/* <ThemeSwitcher /> */}
             <a href="/login" className="btn btn-secondary">
               Log in
             </a>

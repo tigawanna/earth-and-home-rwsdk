@@ -1,0 +1,54 @@
+/* Angled */
+[data-style="angled"]::view-transition-old(root) {
+    animation: none;
+    z-index: -1;
+  }
+  
+  [data-style="angled"]::view-transition-new(root) {
+    animation: unclip 1s;
+    clip-path: polygon(-100vmax 100%, 100% 100%, 100% -100vmax);
+  }
+  
+  @keyframes unclip {
+    0% {
+      clip-path: polygon(100% 100%, 100% 100%, 100% 100%);
+    }
+  }
+
+
+  [data-style="wipe"]::view-transition-group(root) {
+    animation-duration: 1.25s;
+  }
+  
+  [data-style="wipe"]::view-transition-new(root) {
+    animation-name: reveal-light;
+  }
+  
+  [data-style="wipe"]::view-transition-old(root),
+  [data-style="wipe"][data-theme="dark"]::view-transition-old(root) {
+    animation: none;
+  }
+  
+  [data-style="wipe"][data-theme="dark"]::view-transition-new(root) {
+    animation-name: reveal-dark;
+  }
+  
+  @keyframes reveal-dark {
+    from {
+      clip-path: polygon(-30% 0, -30% 0, -15% 100%, -10% 115%);
+    }
+  
+    to {
+      clip-path: polygon(-30% 0, 130% 0, 115% 100%, -10% 115%);
+    }
+  }
+  
+  @keyframes reveal-light {
+    from {
+      clip-path: polygon(130% 0, 130% 0, 115% 100%, 110% 115%);
+    }
+  
+    to {
+      clip-path: polygon(130% 0, -30% 0, -15% 100%, 110% 115%);
+    }
+  }
