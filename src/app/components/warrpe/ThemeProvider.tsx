@@ -1,10 +1,10 @@
 "use client";
 import { ThemeProvider } from "next-themes";
-interface ClientLayoutProps {
+interface ThemeProviderWrapperProps {
   children?: React.ReactNode;
 }
 
-export function ClientLayout({ children }: ClientLayoutProps) {
+export function ThemeProviderWrapper({ children }: ThemeProviderWrapperProps) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <div className="w-full h-full flex flex-col items-center justify-center">{children}</div>
