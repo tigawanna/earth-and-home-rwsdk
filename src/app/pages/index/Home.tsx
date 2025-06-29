@@ -19,6 +19,7 @@ export function Home({ ctx }: RequestInfo) {
           happyFamilies: 500,
           yearsExperience: 15
         }}
+        featuredProperties={featuredProperties}
       />
 
       <FeaturedProperties
