@@ -1,12 +1,6 @@
-export function FooterQuickLinks() {
-  const quickLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/properties', label: 'Properties' },
-    { href: '/buy', label: 'Buy' },
-    { href: '/sell', label: 'Sell' },
-    { href: '/about', label: 'About Us' },
-  ];
+import { quickLinks } from '@/data/site-data';
 
+export function FooterQuickLinks() {
   return (
     <div>
       <h4 className="font-semibold mb-4">Quick Links</h4>

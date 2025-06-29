@@ -1,12 +1,6 @@
-export function FooterServices() {
-  const services = [
-    { href: '/residential', label: 'Residential Sales' },
-    { href: '/commercial', label: 'Commercial Properties' },
-    { href: '/management', label: 'Property Management' },
-    { href: '/investment', label: 'Investment Consulting' },
-    { href: '/analysis', label: 'Market Analysis' },
-  ];
+import { services } from '../../data/site-data';
 
+export function FooterServices() {
   return (
     <div>
       <h4 className="font-semibold mb-4">Services</h4>

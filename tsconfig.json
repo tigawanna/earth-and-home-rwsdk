@@ -22,7 +22,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/components/*": ["./src/app/components/*"],
-      "@generated/*": ["./generated/*"]
+      "@/data/*": ["./src/app/data/*"],
+      "@generated/*": ["./generated/*"],
+      "@/generated/*": ["./generated/*"]
     },
     /* Enable importing .json files */
     "resolveJsonModule": true,

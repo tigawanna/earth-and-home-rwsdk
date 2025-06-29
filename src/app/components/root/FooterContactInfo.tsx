@@ -1,15 +1,9 @@
-import { NewsletterSignup } from '../client/NewsletterSignup';
+
+import { contactInfo } from '@/app/data/site-data';
+import { NewsletterSignup } from '@/components/client/NewsletterSignup';
+
 
 export function FooterContactInfo() {
-  const contactInfo = [
-    { icon: '📞', text: '(555) 123-4567' },
-    { icon: '✉️', text: 'info@earthandhome.com' },
-    { 
-      icon: '📍', 
-      text: '123 Real Estate Blvd,\nSuite 100, City, ST 12345' 
-    },
-  ];
-
   return (
     <div>
       <h4 className="font-semibold mb-4">Contact Info</h4>
